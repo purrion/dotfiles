@@ -1,9 +1,4 @@
+
 [submodule ".config/nvim"]
 	path = .config/nvim
-	url = git@github.com:purrion/kickstart.nvim.git
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
-[submodule ".tmux/plugins/tmux"]
-	path = .tmux/plugins/tmux
-	url = https://github.com/catppuccin/tmux
+	url = https://github.com/purrion/kickstart.nvim
