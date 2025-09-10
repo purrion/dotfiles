@@ -1,0 +1,174 @@
+@import "mocha.css";
+
+/**********************
+*    General styles   *
+***********************/
+
+window#waybar {
+    font-family: "Hack Nerd Font";
+    font-size: 14px;
+    font-weight: bold;
+}
+
+window#waybar > * {
+    margin: 0px 5px;
+}
+
+#workspaces,
+#scratchpad,
+#clock,
+#battery,
+#cpu,
+#memory,
+#idle_inhibitor,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#mode,
+#tray,
+#keyboard-state {
+    /* background-color: shade(#24273a, 1); */
+    padding: 0px 6px;
+}
+
+/*********************
+*    Module styles   *
+*********************/
+
+#custom-notification {
+    font-family: "NotoSansMono Nerd Font";
+    font-size: 15px; 
+    margin: 1px 10px 0px 4px;
+}
+
+#workspaces,
+#scratchpad {
+    color: @lavender;
+    border-radius: 12px;
+    background-color: shade(#24273a, 1);
+    margin: 8px 6px 8px 0px;
+}
+
+#workspaces button {
+    color: @rosewater;
+    min-width: 20px;
+    padding: 0px 2px;
+}
+
+#workspaces button:hover {
+    color: @mauve;
+}
+
+#workspaces button.focused {
+    color: @peach;
+}
+
+#workspaces button.empty {
+    color: @surface2;
+}
+
+#scratchpad {
+    padding: 0px 8px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+#window {
+    color: @text;
+    border-style: hidden;
+    margin: 0px 10px;
+}
+
+/* sway/mode */
+#mode {
+    color: @yellow;
+    border-radius: 10px;
+}
+
+#clock {
+    color: @sky;
+    border-radius: 10px;
+}
+
+#backlight {
+    color: @yellow;
+    border-radius: 10px 0 0 10px;
+}
+
+#battery {
+    color: #d8dee9;
+    border-radius: 0 10px 10px 0;
+}
+
+#battery.charging {
+    color: #81a1c1;
+}
+
+#battery.critical:not(.charging) {
+    color: #bf616a;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        color: @red;
+    }
+}
+
+#cpu {
+    color: @sky;
+}
+
+#memory {
+    color: @sky;
+}
+
+#network.disabled {
+    color: #bf616a;
+}
+
+#network {
+    color: @green;
+    border-radius: 10px;
+}
+
+#network.disconnected {
+    color: #bf616a;
+}
+
+#pulseaudio {
+    color: @flamingo;
+}
+
+#pulseaudio.muted {
+    color: #3b4252;
+}
+
+#idle_inhibitor {
+    background-color: #ebcb8b;
+    color: @base;
+    margin: 0 5px;
+}
+
+#tray {
+    border-radius: 10px;
+}
+
+#keyboard-state {
+    color: @surface1;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+#keyboard-state label:not(:first-child) {
+    margin-left: 6px;
+}
+
+#keyboard-state label.locked {
+    color: @peach;
+}

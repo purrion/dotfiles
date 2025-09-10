@@ -1,0 +1,14 @@
+/** Some apps use titlebar class and some window */
+.titlebar,
+window {
+	box-shadow: none;
+}
+
+/** also remove shadows */
+decoration {
+	box-shadow: none;
+}
+
+decoration:backdrop {
+	box-shadow: none;
+}

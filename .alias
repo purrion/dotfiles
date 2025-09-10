@@ -1,0 +1,16 @@
+# UNIX
+alias ls='ls --color=auto'
+
+# DNF package manager
+alias dnf="sudo dnf"
+alias dnfi="sudo dnf install"
+
+alias dnfr="sudo dnf remove"
+alias dnfar="sudo dnf autoremove"
+
+alias dnfcu="sudo dnf check-update"
+alias dnfu="sudo dnf upgrade --refresh"  # same as `dnf update --refresh`
+
+# Lazy tools
+alias lzg="lazygit"
+alias lzd="lazydocker"

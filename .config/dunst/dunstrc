@@ -1,0 +1,21 @@
+[global]
+frame_color = "#89b4fa"
+separator_color= frame
+monitor = 0
+width = (0, 400)
+height = 500
+shrink = yes
+sort = yes
+
+[urgency_low]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[urgency_normal]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+
+[urgency_critical]
+background = "#1e1e2e"
+foreground = "#cdd6f4"
+frame_color = "#fab387"

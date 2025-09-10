@@ -1,0 +1,299 @@
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term kitty --single-instance
+
+set $launcher "~/.config/rofi/scripts/launcher"
+set $powermenu "~/.config/rofi/scripts/powermenu"
+
+set $swaynag_dialog swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# define display output names
+set $disp1 "eDP-1"
+set $disp2 "HDMI-A-1"
+
+set $gnome-schema org.gnome.desktop.interface
+set $system-theme 'Catppuccin-Mocha-Standard-Blue-Dark'
+set $system-icons 'Adwaita'
+set $cursor_theme 'catppuccin-mocha-dark-cursors'
+set $cursor_size 24
+
+output $disp1 scale 1.5
+
+workspace 1 output $disp1 
+workspace 2 output $disp2 
+workspace 3 output $disp1 
+workspace 4 output $disp2 
+workspace 5 output $disp1 
+workspace 6 output $disp2
+
+### Output configuration
+#
+# Requires: desktop-backgrounds-compat, swaybg
+output * bg $HOME/Pictures/Wallpapers/catppuccin/helloworld.png fill
+
+# Appearance
+default_border pixel 2
+font pango:monospace 1
+gaps inner 6
+gaps outer 6
+smart_borders on
+smart_gaps on
+
+## Window decoration
+# class                 border  backgr. text    indicator child_border
+client.focused          #89b4faff #89b4faff #ffffff00 #7aa2f7   #7aa2f7
+client.focused_inactive #ffffff00 #89b4fa #ffffff00 #2f334d   #2f334d
+client.unfocused        #ffffff00 #89b4fa88 #ffffff00 #2f334d   #2f334d
+client.urgent           #ffffff00 #ebcb8b #ffffff00 #8fbcbb   #ebcb8b
+
+
+# Set gtk themes 
+exec_always {
+    gsettings set $gnome-schema gtk-theme $system-theme
+    gsettings set $gnome-schema color-scheme 'prefer-dark' 
+    gsettings set $gnome-schema icon-theme $system-icons
+}
+
+# Cursor
+seat seat0 xcursor_theme $cursor_theme $cursor_size
+
+# Fonts (For sway window titles only)
+# font pango:$titlebar_font $titlebar_text_size
+
+
+# Disable the Insert/Ins key
+exec_always xmodmap -e "keycode 118 ="
+
+exec swaync
+
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# Get the names of outputs: swaymsg -t get_outputs
+
+### Input configuration
+#
+# Get the names of inputs: swaymsg -t get_inputs
+#
+input "1739:52545:SYNA7DB5:00_06CB:CD41_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+input type:keyboard {
+    repeat_delay 300
+    repeat_rate  30
+    xkb_layout "us"
+    # xkb_options caps:swapescape
+}
+
+#
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+x kill
+
+    # Open the launcher
+    bindsym $mod+o exec $launcher
+
+    # Open the powermenu
+    bindsym $mod+Ctrl+q exec $powermenu
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+q exec $swaynag_dialog
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # Toggle control center
+    bindsym $mod+n exec swaync-client -t -sw
+
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+< or $mod+> for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+Shift+comma splith
+    bindsym $mod+Shift+period splitv
+
+    # Switch the current container between different layout styles
+    # bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+alt+p focus parent
+    # Move focus to the last focused child 
+    bindsym $mod+alt+c focus child
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Escape mode "default"
+    bindsym Ctrl+bracketleft mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+#
+# Control the mouse pointer with the keyboard:
+#
+mode "mouse" {
+    bindsym a mode default, exec 'wl-kbptr-sway-active-win; swaymsg mode mouse'
+    bindsym Shift+a mode default, exec 'wl-kbptr; swaymsg mode mouse',
+
+    # Mouse move
+    bindsym h seat seat0 cursor move -15 0
+    bindsym j seat seat0 cursor move 0 15
+    bindsym k seat seat0 cursor move 0 -15
+    bindsym l seat seat0 cursor move 15 0
+
+    # Left button
+    bindsym s seat seat0 cursor press button1
+    bindsym --release s seat seat0 cursor release button1
+
+    # Middle button
+    bindsym d seat seat0 cursor press button2
+    bindsym --release d seat seat0 cursor release button2
+
+    # Right button
+    bindsym f seat seat0 cursor press button3
+    bindsym --release f seat seat0 cursor release button3
+
+    # Scroll
+    bindsym u exec 'wlrctl pointer scroll 5 0'
+    bindsym i exec 'wlrctl pointer scroll -5 0'
+
+    # Return to default mode
+    bindsym Escape mode "default"
+    bindsym Ctrl+bracketleft mode "default"
+    bindsym $mod+m mode "default"
+}
+
+# bindsym $mod+g exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
+bindsym $mod+m mode "mouse"
+
+# Include configs from 3 locations:
+#  - /usr/share/sway/config.d
+#  - /etc/sway/config.d
+#  - $XDG_CONFIG_HOME/sway/config.d ($HOME/.config/sway/config.d)
+#
+# If multiple directories contain the files with the same name, the later
+# directory takes precedence; `$XDG_CONFIG_HOME/sway/config.d/20-swayidle.conf`
+# will always be loaded instead of `/usr/share/sway/config.d/20-swayidle.conf`
+# or `/etc/sway/config.d/20-swayidle.conf`
+#
+# This mechanism permits overriding our default configuration per-system
+# (/etc) or per-user ($XDG_CONFIG_HOME) basis. Just create the file you
+# want to modify/override in the higher-level directory.
+#
+# For example, to disable the default bar from Fedora configs, you'll need to
+#     $ echo -n > "$HOME/.config/sway/config.d/90-bar.conf"
+#
+# Note the quoting, the $() and the arguments quoting. All the parts are equally
+# important to make the magic work. And if you want to learn the secret behind
+# the trick, it's all in the `wordexp(3)`.
+#
+include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'

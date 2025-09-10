@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+read_led_state() {
+    head -c 1 /sys/class/leds/input?::${1}/brightness 2>/dev/null
+}
+
+output_json() {
+    if [ "$2" = "1" ]; then
+        printf '{"text": "%s", "class": "active"}\n' "$1"
+    else
+        printf '{"text": "", "class": "inactive"}\n'
+    fi
+}
+
+case "$1" in
+    --caps)
+        state=$(read_led_state 'capslock')
+        output_json "CapsLock" "$state"
+        ;;
+    --num)
+        state=$(read_led_state 'numlock')
+        output_json "NumLock" "$state"
+        ;;
+    --scroll)
+        state=$(read_led_state 'scrolllock')
+        output_json "ScrollLock" "$state"
+        ;;
+    *)
+        echo "Usage: $0 [--caps | --num | --scroll]" >&2
+        exit 1
+        ;;
+esac
+

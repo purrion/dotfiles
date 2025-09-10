@@ -1,0 +1,5 @@
+# The defaults below could be overridden in $XDG_CONFIG_HOME/swaylock/config
+#  (~/.config/swaylock/config).
+#
+image=$HOME/Pictures/Wallpapers/night-sky.jpg
+scaling=fill
