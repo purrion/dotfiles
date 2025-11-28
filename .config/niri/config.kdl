@@ -184,6 +184,13 @@ layout {
     }
 }
 
+// Disable the hot corners.
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -205,7 +212,7 @@ prefer-no-csd
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
 // The path is formatted with strftime(3) to give you the screenshot date and time.
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/Pictures/Screenshots/screenshot_niri_%Y-%m-%d %H-%M-%S.png"
 
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
@@ -233,6 +240,11 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+}
+
+window-rule {
+    match app-id=r#"dev\.zed\.Zed"#
+    draw-border-with-background false
 }
 
 // Example: block out two password managers from screen capture.
@@ -387,13 +399,13 @@ binds {
     Mod+3 { focus-workspace 3; }
     Mod+4 { focus-workspace 4; }
     Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
+    Mod+0 { focus-workspace "scratchpad"; }
     Mod+Ctrl+1 { move-column-to-workspace 1; }
     Mod+Ctrl+2 { move-column-to-workspace 2; }
     Mod+Ctrl+3 { move-column-to-workspace 3; }
     Mod+Ctrl+4 { move-column-to-workspace 4; }
     Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+0 { move-column-to-workspace "scratchpad"; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }

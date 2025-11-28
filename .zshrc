@@ -5,6 +5,8 @@ export VISUAL=nvim
 export EDITOR=nvim
 export TERMINAL=kitty
 
+export HELIX_RUNTIME="/usr/lib64/helix/runtime"
+
 #export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
 export ANDROID_HOME=/opt/android_sdk
@@ -32,6 +34,10 @@ export PATH=$PATH:$M2
 # Android
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/opt/gradle/gradle-9.1.0/bin
+
+
+export PATH=$PATH:$HOME/Softwares/FOSS/alda
 
 if [ -d "$ANDROID_HOME/build-tools" ]; then
     build_tools=$(
@@ -189,3 +195,18 @@ unset __conda_setup
 
 # Set up mise for interactive shell
 eval "$(mise activate zsh)"
+
+# bun completions
+[ -s "/home/wanderer/.bun/_bun" ] && source "/home/wanderer/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/wanderer/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

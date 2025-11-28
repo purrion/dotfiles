@@ -1,6 +1,6 @@
 // -*- mode: jsonc -*-
 {
-  "layer": "bottom", // Waybar at bottom layer
+  "layer": "bottom", // Wayland layer (top|bottom)
   "position": "top", // Waybar position (top|bottom|left|right)
   "margin": "0 0 0 0",
   "gtk-layer-shell": true,
@@ -17,8 +17,8 @@
     "memory",
     "battery",
     "network",
-    "tray"
-    ,"keyboard-state",
+    "tray",
+    "keyboard-state",
   ],
 
   // Modules configuration

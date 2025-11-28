@@ -17,7 +17,7 @@
       "model": "claude-3.7-sonnet"
     },
     "model_parameters": [],
-    "default_profile": "ask",
+    "default_profile": "ask"
   },
   "icon_theme": "VSCode Great Icons Theme",
   "features": {

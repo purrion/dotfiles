@@ -27,9 +27,9 @@
   // Modules configuration
 
   "custom/fake-power-button": {
-    "format": "<span size='x-small'>∧,,,∧\n(  ̳• · • ̳)\n/    づ❤︎</span>",
+    "format": "<span size='large'>😎</span>",
     "tooltip": false,
-    "on-click": "notify-send 'meow!'"
+    "on-click": "~/.config/rofi/scripts/powermenu"
   },
 
   "custom/notification": {
